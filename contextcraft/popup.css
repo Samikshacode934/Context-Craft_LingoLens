@@ -1,0 +1,50 @@
+body {
+  width: 350px;
+  font-family: system-ui, sans-serif;
+  padding: 12px;
+  background: #f9f9f9;
+}
+
+h1 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #0078d4;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005ea6;
+}
+
+#output {
+  margin-top: 10px;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+#summary,
+#translation,
+#questions {
+  margin-top: 8px;
+}
+
+footer {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+}

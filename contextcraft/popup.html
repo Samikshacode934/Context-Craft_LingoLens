@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ContextCraft</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🧠 ContextCraft</h1>
+      <p class="subtitle">AI-Powered Research Assistant</p>
+
+      <button id="analyze">Analyze This Page</button>
+      <label>
+        <input type="checkbox" id="simpleMode" /> Explain Simply (ELI5)
+      </label>
+
+      <div id="output">
+        <h3>Status:</h3>
+        <p id="status">Idle</p>
+
+        <div id="summary"></div>
+        <div id="translation"></div>
+        <div id="questions"></div>
+      </div>
+    </div>
+
+    <footer>
+      <small>Powered by Chrome Built-in AI</small>
+    </footer>
+
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>
