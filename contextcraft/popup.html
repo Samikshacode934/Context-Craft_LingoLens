@@ -2,34 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ContextCraft</title>
-    <link rel="stylesheet" href="popup.css" />
+    <title>🧠 ContextCraft + LingoLens</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>🧠 ContextCraft</h1>
-      <p class="subtitle">AI-Powered Research Assistant</p>
+    <h2>🧠 ContextCraft</h2>
+    <p class="tagline">Summarize, Learn, and Translate with AI</p>
 
-      <button id="analyze">Analyze This Page</button>
-      <label>
-        <input type="checkbox" id="simpleMode" /> Explain Simply (ELI5)
-      </label>
+    <label>
+      <input type="checkbox" id="simpleMode" /> Explain Simply (ELI5)
+    </label>
+    <button id="analyze">🧩 Analyze This Page</button>
 
-      <div id="output">
-        <h3>Status:</h3>
-        <p id="status">Idle</p>
+    <div id="status"></div>
 
-        <div id="summary"></div>
-        <div id="translation"></div>
-        <div id="questions"></div>
-      </div>
-    </div>
+    <div id="summary"></div>
+    <div id="questions"></div>
+    <hr />
+    <h3>🌍 LingoLens — Learn from Reading</h3>
+    <p>Select any word/phrase on a webpage, then open this popup.</p>
+    <div id="translation"></div>
+    <button id="saveWord" style="display:none;">💾 Save Word</button>
+    <button id="viewVocab">📘 View Vocabulary</button>
+    <div id="vocabList" style="display:none;"></div>
 
-    <footer>
-      <small>Powered by Chrome Built-in AI</small>
-    </footer>
-
-    <script src="popup.js" type="module"></script>
+    <script src="popup.js"></script>
   </body>
 </html>

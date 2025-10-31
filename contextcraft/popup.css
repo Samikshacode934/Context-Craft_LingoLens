@@ -1,50 +1,54 @@
 body {
-  width: 350px;
-  font-family: system-ui, sans-serif;
-  padding: 12px;
-  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+  width: 330px;
+  padding: 10px;
+  color: #222;
 }
 
-h1 {
-  font-size: 18px;
-  margin-bottom: 4px;
+h2, h3 {
+  margin: 0 0 6px;
 }
 
-.subtitle {
-  color: #777;
+h3 {
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+}
+
+.tagline {
+  color: #666;
+  font-size: 0.9em;
   margin-bottom: 10px;
 }
 
+#status {
+  background: #f5f5f5;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+#summary, #translation {
+  background: #fff6e6;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  min-height: 50px;
+}
+
 button {
-  background-color: #0078d4;
-  border: none;
+  background: #007bff;
   color: white;
-  padding: 8px 12px;
+  border: none;
+  padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
+  margin: 4px 4px 0 0;
 }
 
 button:hover {
-  background-color: #005ea6;
+  background: #0056b3;
 }
 
-#output {
-  margin-top: 10px;
-  padding: 8px;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-#summary,
-#translation,
-#questions {
-  margin-top: 8px;
-}
-
-footer {
-  margin-top: 8px;
-  text-align: center;
-  font-size: 12px;
-  color: #999;
+ul {
+  padding-left: 20px;
 }

@@ -1,22 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "ContextCraft - The AI Research Assistant",
-  "version": "1.0",
-  "description": "Summarize, translate, and generate study questions for any webpage using Chrome's built-in AI APIs.",
-  "permissions": ["activeTab", "scripting", "storage"],
-  "host_permissions": ["<all_urls>"],
+  "name": "ContextCraft + LingoLens",
+  "version": "2.0",
+  "description": "AI Research & Language Assistant using Gemini API.",
+  "permissions": ["activeTab", "scripting", "tabs", "storage"],
+  "host_permissions": ["https://generativelanguage.googleapis.com/*"],
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "🧠 ContextCraft"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content_script.js"],
-      "run_at": "document_idle"
+      "js": ["content_script.js"]
     }
   ]
 }

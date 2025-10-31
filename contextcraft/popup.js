@@ -1,40 +1,85 @@
 const analyzeBtn = document.getElementById("analyze");
 const statusEl = document.getElementById("status");
 const summaryEl = document.getElementById("summary");
-const translationEl = document.getElementById("translation");
 const questionsEl = document.getElementById("questions");
+const translationEl = document.getElementById("translation");
+const saveBtn = document.getElementById("saveWord");
+const vocabBtn = document.getElementById("viewVocab");
+const vocabList = document.getElementById("vocabList");
 const simpleMode = document.getElementById("simpleMode");
 
+let currentWord = "";
+
+// --- Handle Analyze This Page ---
 analyzeBtn.addEventListener("click", async () => {
   statusEl.textContent = "Extracting content...";
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const page = await chrome.tabs.sendMessage(tab.id, { type: "GET_PAGE_TEXT" });
+    if (!page?.text) throw new Error("No page text found");
 
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  const page = await chrome.tabs.sendMessage(tab.id, { type: "GET_PAGE_TEXT" });
+    statusEl.textContent = "Analyzing with AI...";
+    const result = await chrome.runtime.sendMessage({
+      type: "ANALYZE_TEXT",
+      payload: { text: page.text, explainSimple: simpleMode.checked }
+    });
 
-  if (!page || !page.text) {
-    statusEl.textContent = "Could not extract text.";
-    return;
+    if (result?.error) {
+      statusEl.textContent = "Error: " + result.error;
+      return;
+    }
+
+    statusEl.textContent = "✅ Done";
+    summaryEl.innerHTML = `<h4>Summary</h4><p>${escapeHtml(result.summary || "")}</p>`;
+    questionsEl.innerHTML = `<h4>Study Questions</h4><ul>${(result.questions || [])
+      .map((q) => `<li>${escapeHtml(q)}</li>`)
+      .join("")}</ul>`;
+  } catch (err) {
+    statusEl.textContent = "Error: " + err.message;
   }
+});
 
-  statusEl.textContent = "Analyzing with AI...";
+// --- Listen for highlighted text (Translation feature) ---
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg.type === "TEXT_SELECTED") handleSelectedText(msg.payload.text);
+});
 
-  const result = await chrome.runtime.sendMessage({
-    type: "ANALYZE_TEXT",
-    payload: { text: page.text, explainSimple: simpleMode.checked },
+async function handleSelectedText(text) {
+  currentWord = text;
+  translationEl.textContent = `Analyzing "${text}"...`;
+  const response = await chrome.runtime.sendMessage({
+    type: "TRANSLATE_TEXT",
+    payload: { text }
   });
+  translationEl.textContent = response.result;
+  saveBtn.style.display = "inline-block";
+}
 
-  if (result.error) {
-    statusEl.textContent = "Error: " + result.error;
-    return;
+// --- Save vocab locally ---
+saveBtn.addEventListener("click", async () => {
+  if (!currentWord) return;
+  const entry = { word: currentWord, meaning: translationEl.textContent };
+  const { vocab = [] } = await chrome.storage.local.get("vocab");
+  vocab.push(entry);
+  await chrome.storage.local.set({ vocab });
+  translationEl.textContent = `✅ Saved "${currentWord}"`;
+  saveBtn.style.display = "none";
+});
+
+// --- View saved vocabulary ---
+vocabBtn.addEventListener("click", async () => {
+  const { vocab = [] } = await chrome.storage.local.get("vocab");
+  if (vocab.length === 0) {
+    vocabList.innerHTML = "<p>No saved words yet.</p>";
+  } else {
+    vocabList.innerHTML =
+      "<ul>" +
+      vocab
+        .map((v) => `<li><b>${escapeHtml(v.word)}</b>: ${escapeHtml(v.meaning)}</li>`)
+        .join("") +
+      "</ul>";
   }
-
-  statusEl.textContent = "Done ";
-  summaryEl.innerHTML = `<h4> Summary</h4><p>${escapeHtml(result.summary)}</p>`;
-  if (result.translation)
-    translationEl.innerHTML = `<h4> Translation</h4><p>${escapeHtml(result.translation)}</p>`;
-  questionsEl.innerHTML = `<h4>? Study Questions</h4><ul>${result.questions
-    .map((q) => `<li>${escapeHtml(q)}</li>`)
-    .join("")}</ul>`;
+  vocabList.style.display = vocabList.style.display === "none" ? "block" : "none";
 });
 
 function escapeHtml(str) {
