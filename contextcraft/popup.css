@@ -1,54 +1,97 @@
+/* ---------- General Body ---------- */
 body {
-  font-family: Arial, sans-serif;
-  width: 330px;
-  padding: 10px;
+  font-family: 'Arial', sans-serif;
+  width: 380px;           /* slightly wider */
+  padding: 15px;
+  background: #ffffff;    /* clean white background */
   color: #222;
+  box-sizing: border-box;
 }
 
-h2, h3 {
-  margin: 0 0 6px;
+/* ---------- Header Styles ---------- */
+h2 {
+  color: #6a0dad;         /* purple-blue header */
+  margin-bottom: 5px;
 }
 
 h3 {
-  border-top: 1px solid #ddd;
+  color: #4a2fa3;
+  margin: 10px 0 6px;
+  border-top: 2px solid #ddd;
   padding-top: 8px;
 }
 
+/* ---------- Tagline ---------- */
 .tagline {
   color: #666;
   font-size: 0.9em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
+/* ---------- Status Box ---------- */
 #status {
-  background: #f5f5f5;
-  padding: 8px;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  background: #f0f0f5;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-weight: bold;
 }
 
+/* ---------- Summary & Translation Cards ---------- */
 #summary, #translation {
-  background: #fff6e6;
-  padding: 8px;
-  border-radius: 6px;
-  margin-bottom: 8px;
-  min-height: 50px;
+  background: #f9f0ff;    /* light purple card */
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  min-height: 60px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* ---------- Buttons ---------- */
 button {
-  background: #007bff;
+  background: #6a0dad;    /* purple-blue buttons */
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
   cursor: pointer;
-  margin: 4px 4px 0 0;
+  margin: 4px 6px 4px 0;
+  font-weight: bold;
+  transition: background 0.2s ease;
 }
 
 button:hover {
-  background: #0056b3;
+  background: #4a2fa3;
 }
 
+/* ---------- Vocabulary List ---------- */
+#vocabList {
+  background: #e6f0ff;    /* light blue footer style */
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ---------- Lists ---------- */
 ul {
-  padding-left: 20px;
+  padding-left: 22px;
+}
+
+/* ---------- Input Checkbox ---------- */
+input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: #e6f0ff;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.85em;
+  color: #333;
+  margin-top: 12px;
 }

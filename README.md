@@ -3,6 +3,7 @@ Learn Smarter. Read Deeper. Speak Better.
 
 ContextCraft + LingoLens turns your everyday browsing into an interactive learning experience.
 It combines AI research assistance with language learning tools — powered by Google Gemini and Chrome’s Built-in AI.
+Demo vedio  :-  https://youtu.be/L95WPSs_TbQ?si=lqhtw2wix6qB9_Kl
 
 🚀 Features
 🧠 ContextCraft (AI Research Assistant)

@@ -1,4 +1,4 @@
-// Extract readable text from the page
+// Extract page text
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "GET_PAGE_TEXT") {
     const text = document.body.innerText || "";
@@ -6,13 +6,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// Detect when user highlights text (for translation feature)
+// Detect highlighted text
 document.addEventListener("mouseup", () => {
   const selected = window.getSelection().toString().trim();
   if (selected) {
-    chrome.runtime.sendMessage({
-      type: "TEXT_SELECTED",
-      payload: { text: selected }
-    });
+    // Store selected word in storage
+    chrome.storage.local.set({ lastSelected: selected });
   }
 });

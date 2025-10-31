@@ -29,7 +29,7 @@ analyzeBtn.addEventListener("click", async () => {
       return;
     }
 
-    statusEl.textContent = "✅ Done";
+    statusEl.textContent = "Done";
     summaryEl.innerHTML = `<h4>Summary</h4><p>${escapeHtml(result.summary || "")}</p>`;
     questionsEl.innerHTML = `<h4>Study Questions</h4><ul>${(result.questions || [])
       .map((q) => `<li>${escapeHtml(q)}</li>`)
@@ -39,7 +39,13 @@ analyzeBtn.addEventListener("click", async () => {
   }
 });
 
-// --- Listen for highlighted text (Translation feature) ---
+// --- Load last selected word when popup opens (LingoLens) ---
+window.addEventListener("load", async () => {
+  const { lastSelected } = await chrome.storage.local.get("lastSelected");
+  if (lastSelected) handleSelectedText(lastSelected);
+});
+
+// --- Listen for live highlighted text while popup is open ---
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "TEXT_SELECTED") handleSelectedText(msg.payload.text);
 });
@@ -47,12 +53,17 @@ chrome.runtime.onMessage.addListener((msg) => {
 async function handleSelectedText(text) {
   currentWord = text;
   translationEl.textContent = `Analyzing "${text}"...`;
-  const response = await chrome.runtime.sendMessage({
-    type: "TRANSLATE_TEXT",
-    payload: { text }
-  });
-  translationEl.textContent = response.result;
-  saveBtn.style.display = "inline-block";
+  try {
+    const response = await chrome.runtime.sendMessage({
+      type: "TRANSLATE_TEXT",
+      payload: { text }
+    });
+    translationEl.textContent = response.result;
+    saveBtn.style.display = "inline-block";
+  } catch (err) {
+    translationEl.textContent = "⚠️ Translation failed.";
+    console.error("Translation error:", err);
+  }
 }
 
 // --- Save vocab locally ---
@@ -62,7 +73,7 @@ saveBtn.addEventListener("click", async () => {
   const { vocab = [] } = await chrome.storage.local.get("vocab");
   vocab.push(entry);
   await chrome.storage.local.set({ vocab });
-  translationEl.textContent = `✅ Saved "${currentWord}"`;
+  translationEl.textContent = `Saved "${currentWord}"`;
   saveBtn.style.display = "none";
 });
 

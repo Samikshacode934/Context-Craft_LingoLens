@@ -1,8 +1,10 @@
-const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
-const GEMINI_MODEL = "gemini-1.5-flash";
+const GEMINI_API_KEY = "A......................................";
+
+const GEMINI_MODEL = "gemini-2.5-flash";
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // 📌 1. Handle Summarize / Explain / Study Questions
+
+  // ContextCraft: Summarize & Study Questions
   if (message.type === "ANALYZE_TEXT") {
     (async () => {
       try {
@@ -21,9 +23,7 @@ ${text}
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }]
-            })
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
           }
         );
 
@@ -39,8 +39,7 @@ ${text}
         }
 
         const output =
-          data.candidates?.[0]?.content?.parts?.[0]?.text ||
-          "No response received.";
+          data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
 
         const [summary, questionsRaw = ""] = output.split(/Questions?:/i);
         const questions = questionsRaw
@@ -53,14 +52,15 @@ ${text}
         sendResponse({ error: err.message });
       }
     })();
-    return true;
+    return true; // Keep sendResponse alive for async
   }
 
-  // 📌 2. Handle Translation / Explanation for LingoLens
+  //  LingoLens: Translate / Explain
   if (message.type === "TRANSLATE_TEXT") {
     (async () => {
       try {
         const text = message.payload.text;
+
         const response = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
           {
@@ -82,8 +82,8 @@ ${text}
 
         const data = await response.json();
         const output =
-          data.candidates?.[0]?.content?.parts?.[0]?.text ||
-          "No translation available.";
+          data.candidates?.[0]?.content?.parts?.[0]?.text || "No translation available.";
+
         sendResponse({ result: output });
       } catch (err) {
         console.error("Translate error:", err);
