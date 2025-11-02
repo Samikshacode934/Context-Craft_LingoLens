@@ -126,4 +126,7 @@ Offline summarization (Gemini Nano) support is coming soon.
 
 📊 Learning dashboard with progress stats
 
+© 2025 [Samiksha Gupta]. All rights reserved.  
+This project was developed for the Google Built-in AI Hackathon.  
+Reproduction, redistribution, or modification without permission is prohibited.
 
