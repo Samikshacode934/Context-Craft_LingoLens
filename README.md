@@ -1,132 +1,187 @@
-🧠 ContextCraft + LingoLens
-Learn Smarter. Read Deeper. Speak Better.
+![alt text][def]
+---
 
-ContextCraft + LingoLens turns your everyday browsing into an interactive learning experience.
-It combines AI research assistance with language learning tools — powered by Google Gemini and Chrome’s Built-in AI.
-Demo vedio  :-  https://youtu.be/oY3Tl-pCAIk?si=87ncOwaJXX6qqe0T
+# 🧠 ContextCraft + LingoLens
 
-🚀 Features
-🧠 ContextCraft (AI Research Assistant)
+**Learn Smarter. Read Deeper. Speak Better.**
 
-✨ Summarize webpages using Gemini AI
+> Transform your everyday browsing into a powerful, interactive learning experience — powered by **Google Gemini** and **Chrome’s Built-in AI**.
 
-👶 Explain Simply (ELI5 mode) — understand hard topics easily
+🎥 **Demo Video:** [Watch on YouTube](https://youtu.be/oY3Tl-pCAIk?si=87ncOwaJXX6qqe0T)
+📦 **GitHub Repo:** [Context-Craft_LingoLens](https://github.com/Samikshacode934/Context-Craft_LingoLens)
 
-🧩 Auto-generate Study Questions — learn actively
+---
 
-🔒 Private by design — all content stays local (or minimal API)
+## 🚀 Overview
 
-⚡ Lightweight — runs right in your browser
+**ContextCraft + LingoLens** is a dual-purpose Chrome Extension that blends:
 
-🌍 LingoLens (Language Learning Assistant)
+* 🧠 **AI-powered research assistance**, and
+* 🌍 **Language learning support**
 
-📘 Instant translation on text selection
+—all directly inside your browser.
 
-🧾 Click to save vocab words for review later
+Whether you’re reading an article, studying online, or exploring new languages, this tool helps you **comprehend, summarize, and learn from content you actually read.**
 
-🗣️ Practice mode (coming soon) — quiz yourself on saved words
+---
 
-🌐 Offline-ready translation memory (future feature)
+## ✨ Key Features
 
-💬 Learns from your actual reading habits
+### 🧠 **ContextCraft (AI Research Assistant)**
 
-🧩 How It Works
+* 📖 **Summarize webpages** using Gemini AI
+* 👶 **Explain Simply (ELI5 Mode)** — understand complex ideas easily
+* 🧩 **Auto-generate study questions** to reinforce learning
+* 🔒 **Private by design** — all data stays local or uses minimal API calls
+* ⚡ **Lightweight & fast** — runs directly in your browser
 
-Select text on any page → get instant translation + “Save Word” option.
+---
 
-Click the 🧠 ContextCraft icon → analyze the entire page.
+### 🌍 **LingoLens (Language Learning Assistant)**
 
-Choose between:
+* 📘 **Instant translation** on text selection
+* 💾 **Save vocabulary** with one click
+* 🗣️ **Practice mode** *(coming soon)* — quiz yourself on saved words
+* 💬 **Learns from your real reading habits**
+* 🌐 **Offline-ready** translation memory *(future feature)*
 
-Summarize Page
+---
 
-Explain Simply (ELI5)
+## 🧩 How It Works
 
-Generate Study Questions
+1. **Highlight any word or phrase** → get instant translation + “Save Word” option.
+2. **Click the 🧠 ContextCraft icon** → analyze the page with one of three modes:
 
-(Optional) Review your saved vocab later in the popup.
+   * “Summarize Page”
+   * “Explain Simply (ELI5)”
+   * “Generate Study Questions”
+3. **Review saved vocabulary** anytime from the popup panel.
 
-🧰 Folder Structure
+---
+
+## 🧰 Folder Structure
+
+```
 contextcraft-lingolens/
 ├── manifest.json
 ├── background.js
 ├── popup.html
 ├── popup.js
 ├── content_script.js
-├── config.js          # optional for storing API key securely
+├── config.js          # optional (for API key)
 ├── README.md
-└── icons/             #  logo/icon
+└── icons/             # extension icons
+```
 
-⚙️ Setup Guide
-1. Clone & Load in Chrome
-git clone https://github.com/YOUR-USERNAME/contextcraft-lingolens.git
+---
+
+## ⚙️ Setup & Installation
+
+### 🪄 Step 1: Clone & Load Extension
+
+```bash
+git clone https://github.com/Samikshacode934/Context-Craft_LingoLens.git
+```
+
+Then:
+
+1. Open **Chrome** → **Extensions** → **Developer Mode** → **Load Unpacked**
+2. Select your project folder.
+
+---
+
+### 🔑 Step 2: Add Your Gemini API Key 
 
 
-Then open Chrome → Extensions → Developer Mode → Load Unpacked
-Select your project folder.
+#### Option A — Simple (for quick demo)
 
-2. Add Your Gemini API Key
-Option A — Quick & Simple
+Edit **background.js**:
 
-Edit background.js and add your key at the top:
-
+```js
 const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
-const GEMINI_MODEL = "gemini-1.5-flash";
+const GEMINI_MODEL = "gemini-2.5-flash";
+```
 
-Option B — Secure
+#### Option B — Secure (recommended)
 
-Create config.js:
+Create a new file called **config.js**:
 
+```js
 export const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
 export const GEMINI_MODEL = "gemini-1.5-flash";
+```
 
+Add this to `.gitignore`:
 
-Add this to .gitignore:
-
+```
 config.js
+```
 
-🧠 Chrome Built-in AI (Optional Offline Mode)
+---
 
-Enable these two flags in Chrome Canary:
+### ⚙️ Step 3: Enable Chrome Built-in AI (Optional Offline Mode)
 
+If you’re using **Chrome Canary**, enable these two flags:
+
+```
 chrome://flags/#prompt-api-for-gemini-nano
 chrome://flags/#optimization-guide-on-device
+```
 
+Restart Chrome afterward.
 
-Then restart Chrome.
+---
 
-💡 Example Demo Flow (for your hackathon video)
+## 🧠 Example
 
-Open a Wikipedia page in another language or topic-rich site.
+1. Open a Wikipedia or educational webpage.
+2. Highlight a word → show **instant translation** and **Add to Vocab** option.
+3. Click “🧠 Analyze This Page” → display:
 
-Highlight a word — show instant translation + “Add to Vocab.”
+   * Summary
+   * Simple (ELI5) explanation
+   * 5 Study Questions
+4. Open popup again → show saved vocabulary.
+5. Say:
 
-Click “🧠 Analyze This Page” → get AI summary, simple version, and 5 study questions.
+   > “Learn while you browse — ContextCraft + LingoLens helps you study smarter.”
 
-Open popup again → show saved vocab list.
+---
 
-Say: “Learn while you browse — ContextCraft + LingoLens helps you study smarter.”
+## 🔒 Privacy & Local AI
 
-Keep it under 2 minutes. Use clear transitions, upbeat music, and highlight your unique dual feature (research + language learning).
+* No personal data leaves your device unless you use Gemini’s cloud API.
+* **Offline summarization (Gemini Nano)** support coming soon.
+* All vocab and summaries are stored **locally** in Chrome storage.
 
-🔒 Privacy & Local AI
+---
 
-No personal data leaves your device unless you use the Gemini Cloud API.
-Offline summarization (Gemini Nano) support is coming soon.
+## 🌟 Future Roadmap
 
-🌟 Future Plans
+✅ Smart Vocab Practice Mode (with spaced repetition)
+✅ Voice Pronunciation Support
+✅ AI Quiz Builder from saved vocab
+✅ Full offline summarization
+✅ Progress Dashboard
 
-🧑‍🏫 Smart Vocab Practice Mode (with spaced repetition)
+---
 
-🔉 Voice Pronunciation Support
+## 🏆 Credits
 
-🧩 AI Quiz Builder from your saved vocab
+👩‍💻 Developed by **[Samiksha Gupta]**
+For **Google Built-in AI Hackathon 2025**
 
-💾 Full offline summarization
-
-📊 Learning dashboard with progress stats
-
-© 2025 [Samiksha Gupta]. All rights reserved.  
-This project was developed for the Google Built-in AI Hackathon.  
+© 2025 Samiksha Gupta. All rights reserved.
 Reproduction, redistribution, or modification without permission is prohibited.
 
+---
+
+
+
+`#chrome-extension` • `#google-gemini` • `#ai` • `#language-learning` • `#summarizer` • `#research-tool` • `#education-ai` • `#translation` • `#gemini-nano` • `#lingolens` • `#contextcraft`
+
+---
+
+
+
+[def]: <Screenshot (12).png>
